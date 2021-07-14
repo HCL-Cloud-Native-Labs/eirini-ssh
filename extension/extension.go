@@ -89,7 +89,7 @@ func (ext *SSH) Handle(ctx context.Context, eiriniManager eirinix.Manager, pod *
 		if err != nil {
 			return admission.Errored(http.StatusBadRequest, errors.Wrap(err, "Failed to generate SSH key for the application"))
 		}
-
+                log.Infof("Welcome my eirini-ssh codebase...............: %s (%s)", podCopy.Uid, podCopy.Name)
 		newSecret := &v1.Secret{
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      secretName,
