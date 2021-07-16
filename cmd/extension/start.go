@@ -39,7 +39,7 @@ var startCmd = &cobra.Command{
 
 		namespace := viper.GetString("namespace")
 
-		log.Infof("Starting %s with namespace %s", version.Version, namespace)
+		log.Infof("Starting %s with namespace : test %s", version.Version, namespace)
 
 		webhookHost := viper.GetString("operator-webhook-host")
 		webhookPort := viper.GetInt32("operator-webhook-port")

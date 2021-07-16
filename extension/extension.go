@@ -6,7 +6,8 @@ import (
 	"code.cloudfoundry.org/diego-ssh/keys"
 	. "code.cloudfoundry.org/eirini-ssh/pkg/logger"
 	eirinix "code.cloudfoundry.org/eirinix"
-
+        
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -89,11 +90,25 @@ func (ext *SSH) Handle(ctx context.Context, eiriniManager eirinix.Manager, pod *
 		if err != nil {
 			return admission.Errored(http.StatusBadRequest, errors.Wrap(err, "Failed to generate SSH key for the application"))
 		}
-                log.Infof("Welcome my eirini-ssh codebase...............: %s (%s)", podCopy.Uid, podCopy.Name)
-		newSecret := &v1.Secret{
+	       println("Welcome my eirini-ssh codebase................")
+	       fmt.Println("pod copy==========", *podCopy)
+               fmt.Println("******************************pod UID******************************", podCopy.UID)
+		
+        
+	       newSecret := &v1.Secret{
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      secretName,
 				Namespace: podCopy.Namespace,
+				OwnerReferences: []metav1.OwnerReference{
+					{
+					 APIVersion: "v1",
+					 Kind: "Pod",
+					 Name: "mypodname",
+					 UID : "33ad61b2-276a-449f-a74c-f3967ed4539a",	
+				         BlockOwnerDeletion: true,
+					 Controller: true,
+					},
+			       },
 			},
 			StringData: map[string]string{
 				"public_key":  key.AuthorizedKey(),
