@@ -94,7 +94,8 @@ func (ext *SSH) Handle(ctx context.Context, eiriniManager eirinix.Manager, pod *
 	       fmt.Println("pod copy==========", *podCopy)
                fmt.Println("******************************pod UID******************************", podCopy.UID)
 		
-        
+               blockOwnerDeletion := true
+               isController := true
 	       newSecret := &v1.Secret{
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      secretName,
@@ -105,8 +106,8 @@ func (ext *SSH) Handle(ctx context.Context, eiriniManager eirinix.Manager, pod *
 					 Kind: "Pod",
 					 Name: "mypodname",
 					 UID : "33ad61b2-276a-449f-a74c-f3967ed4539a",	
-				         BlockOwnerDeletion: true,
-					 Controller: true,
+                                         BlockOwnerDeletion: &blockOwnerDeletion,
+                                         Controller: &isController,
 					},
 			       },
 			},
