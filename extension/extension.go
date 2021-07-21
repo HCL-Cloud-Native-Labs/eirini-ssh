@@ -104,8 +104,8 @@ func (ext *SSH) Handle(ctx context.Context, eiriniManager eirinix.Manager, pod *
 					{
 					 APIVersion: "v1",
 					 Kind: "Pod",
-					 Name: "mypodname",
-					 UID : "33ad61b2-276a-449f-a74c-f3967ed4539a",	
+					 Name: podCopy.Name,
+					 UID : podCopy.UID,	
                                          BlockOwnerDeletion: &blockOwnerDeletion,
                                          Controller: &isController,
 					},
