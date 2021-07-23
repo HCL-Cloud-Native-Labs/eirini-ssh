@@ -100,7 +100,7 @@ func (ext *SSH) Handle(ctx context.Context, eiriniManager eirinix.Manager, pod *
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      secretName,
 				Namespace: podCopy.Namespace,
-				OwnerReferences: []metav1.OwnerReference{
+				/*OwnerReferences: []metav1.OwnerReference{
 					{
 					 APIVersion: "v1",
 					 Kind: "Pod",
@@ -108,7 +108,7 @@ func (ext *SSH) Handle(ctx context.Context, eiriniManager eirinix.Manager, pod *
 					 BlockOwnerDeletion: &blockOwnerDeletion,
                                          Controller: &isController,
 					},
-			       },
+			       },*/
 			},
 			StringData: map[string]string{
 				"public_key":  key.AuthorizedKey(),
